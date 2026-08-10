@@ -1,30 +1,31 @@
-# Change description parameter from String to Composable
+# Resolve Git Push Issues
 
-The user wants to store UI logic (a Composable function) directly within the `AlgoProblem` data model. While this is technically possible, it changes how the data class is handled in terms of stability and equality.
+The issue is that your local repository and the GitHub repository have "diverged." Both have an "Initial commit," but they were created separately and don't share a history. Git prevents you from pushing because it would overwrite the history on GitHub.
 
-## User Review Required
+## Current State
+- **Local**: Contains your project files and a commit (`8c41a51`) labeled "Initial commit."
+- **GitHub**: Contains a `.gitignore` file and a different commit (`3213390`) also labeled "Initial commit."
 
-> [!IMPORTANT]
-> Storing `@Composable` functions in a `data class` is generally discouraged because:
-> 1. **Equality**: Two `AlgoProblem` objects with identical titles but different lambda instances will not be considered "equal".
-> 2. **Separation of Concerns**: Data models should ideally hold data, while UI logic should reside in the Composable layer.
-> 3. **Stability**: If the lambda captures unstable state, it might cause unnecessary recompositions.
->
-> **Alternative**: Consider keeping `description` as a `String` (perhaps using Markdown or HTML for rich text) and using a separate Composable function to render it.
+## Proposed Solution
 
-## Proposed Changes
+I recommend using a "rebase" to merge these histories. This will take your local work and place it "on top of" the history that is already on GitHub.
 
-### Data Model
+### Steps to execute in the terminal:
 
-#### [MODIFY] [AlgoProblem.kt](file:///Users/marcusabsher/AndroidStudioProjects/AlgoSolutionsApp/app/src/main/java/com/example/algosolutionsapp/data/model/AlgoProblem.kt)
-- Change `description: String` to `description: @Composable () -> Unit`.
-- Import `androidx.compose.runtime.Composable`.
+1.  **Pull changes with rebase**:
+    ```bash
+    git pull origin main --rebase
+    ```
+2.  **Handle Conflicts** (if any):
+    Since both histories have a `.gitignore` file, you might see a conflict. If you do:
+    - Open `.gitignore` and choose which parts to keep (or keep both).
+    - Run `git add .gitignore`
+    - Run `git rebase --continue`
+3.  **Push to GitHub**:
+    ```bash
+    git push origin main
+    ```
 
 ## Verification Plan
-
-### Automated Tests
-- Run `analyze_file` on `AlgoProblem.kt` to ensure syntax correctness.
-- Run `gradle_build("app:assembleDebug")` to ensure the project still compiles.
-
-### Manual Verification
-- None required as there are no usages yet.
+- Run `git status` after the pull to ensure the history is merged.
+- Run `git log --oneline --graph --all` to verify your local commit is now ahead of `origin/main`.
