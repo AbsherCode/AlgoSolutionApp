@@ -1,0 +1,3 @@
+- `[x]` Update `compileSdk` and `targetSdk` to 37 in `app/build.gradle.kts`
+- `[x]` Run Gradle Sync
+- `[x]` Verify build with `app:assembleDebug`
