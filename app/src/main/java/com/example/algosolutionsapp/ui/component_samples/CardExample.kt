@@ -13,19 +13,33 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CardExample() {
-    Column(
-        modifier = Modifier.padding(16.dp),
-    ) {
+    val cardCode = """
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            )
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text("Material 3 Surface Variant Card", style = MaterialTheme.typography.titleMedium)
-                Text(
-                    "This card leverages the pre-configured color palette definitions optimized for modern system dark and light modes.",
-                    modifier = Modifier.padding(top = 8.dp)
-                )
+                Text("This card leverages the pre-configured color palette definitions...")
+            }
+        }
+    """.trimIndent()
+
+    CodePreviewWrapper(codeString = cardCode) {
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text("Material 3 Surface Variant Card", style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        "This card leverages the pre-configured color palette definitions optimized for modern system dark and light modes.",
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
             }
         }
     }

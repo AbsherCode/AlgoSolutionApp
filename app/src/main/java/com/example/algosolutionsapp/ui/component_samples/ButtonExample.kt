@@ -14,18 +14,41 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ButtonExample() {
-    Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
-            Text("Filled Button (Primary Action)")
+    val sourceCode = """
+        @Composable
+        fun ButtonExample() {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                    Text("Filled Button (Primary Action)")
+                }
+                
+                OutlinedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                    Text("Outlined Button (Secondary Action)")
+                }
+                
+                ElevatedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                    Text("Elevated Button")
+                }
+            }
         }
-        OutlinedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
-            Text("Outlined Button (Secondary Action)")
-        }
-        ElevatedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
-            Text("Elevated Button")
+    """.trimIndent()
+
+    CodePreviewWrapper(codeString = sourceCode) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                Text("Filled Button (Primary Action)")
+            }
+            OutlinedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                Text("Outlined Button (Secondary Action)")
+            }
+            ElevatedButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                Text("Elevated Button")
+            }
         }
     }
 }
