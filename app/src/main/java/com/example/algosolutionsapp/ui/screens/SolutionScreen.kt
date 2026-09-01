@@ -18,6 +18,11 @@ import com.example.algosolutionsapp.ui.solutions.ReverseStringSolution
 import com.example.algosolutionsapp.ui.solutions.TwoSumSolution
 import com.example.algosolutionsapp.ui.component_samples.ButtonExample
 import com.example.algosolutionsapp.ui.component_samples.CardExample
+import com.example.algosolutionsapp.ui.solutions.FizzBuzzSolution
+import com.example.algosolutionsapp.ui.solutions.MergeTwoSortedListsSolution
+import com.example.algosolutionsapp.ui.solutions.PalindromeNumberSolution
+import com.example.algosolutionsapp.ui.solutions.RomanToIntegerSolution
+import com.example.algosolutionsapp.ui.solutions.ValidParenthesesSolution
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +55,11 @@ fun SolutionScreen(problemId: String, onBack: () -> Unit) {
                 // Algorithm Mappings
                 "two_sum" -> TwoSumSolution()
                 "reverse_string" -> ReverseStringSolution()
+                "fizz_buzz" -> FizzBuzzSolution()
+                "palindrome_number" -> PalindromeNumberSolution()
+                "merge_two_sorted_lists" -> MergeTwoSortedListsSolution()
+                "roman_to_integer" -> RomanToIntegerSolution()
+                "valid_parentheses" -> ValidParenthesesSolution()
 
                 // Component Mappings
                 "custom_button" -> ButtonExample()
